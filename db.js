@@ -9,10 +9,6 @@ const sequelize = new Sequelize ('rest-api','root','root',{
 const Book = BookModel (sequelize, Sequelize);
 
 sequelize.sync({ force : false})
-.then(() => {
-    console.log('Tablas sincronizadas');
-})
-
 
 module.exports = {
     Book
