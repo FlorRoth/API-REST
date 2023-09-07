@@ -34,7 +34,10 @@ router.post('/input/:field', async (req, res) => {
         else {
             req.body[field] = req.body[field].toUpperCase();
             const book = await Book.create(req.body);
-            res.json(book.ID);
+            const bookData = {
+                "id": book.ID,
+            };
+            res.json(bookData);
         }
     } catch (error) {
         res.status(500).json({ message: 'Error: No se ha podido crear el libro correctamente' });
