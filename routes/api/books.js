@@ -2,17 +2,6 @@ const router = require ('express').Router();
 
 const {Book} = require('../../db')
 
-router.get('/', async (req, res) => {
-    try {
-    const books = await Book.findAll();
-    if (!books) {
-        return res.status(404).json({ message: 'No se ha encontrado ningun libro' });
-    }
-    res.json(books);
-    } catch (error) {
-        res.status(500).json({ message: 'Error al buscar libros' });
-    }
-});
 
 router.get('/get_data/:bookId', async (req, res) => {
     try {
@@ -35,15 +24,6 @@ router.get('/get_data/:bookId', async (req, res) => {
 });
 
 
-router.post('/', async (req, res) => {
-    try {
-        const books = await Book.create(req.body);
-        res.json(books);
-    } catch (error) {
-        res.status(500).json({ message: 'Error: No se ha podido crear el libro correctamente' }); 
-    }
-});
-
 router.post('/input/:field', async (req, res) => {
     try {
         const validFields = Object.keys(Book.rawAttributes);
@@ -62,7 +42,7 @@ router.post('/input/:field', async (req, res) => {
 });
 
 
-router.put('/books/:bookId', async (req, res) => {
+router.put('/:bookId', async (req, res) => {
     try {
     await Book.update(req.body,{
         where: {id: req.params.bookId}
@@ -74,7 +54,7 @@ router.put('/books/:bookId', async (req, res) => {
 });
 
 
-router.delete('/books/:bookId', async (req, res) => {
+router.delete('/:bookId', async (req, res) => {
     try {
     await Book.destroy({
         where: {id: req.params.bookId}
