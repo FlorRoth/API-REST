@@ -8,7 +8,7 @@ router.get('/get_data/:bookId', async (req, res) => {
         const book = await Book.findOne({ where: {id: req.params.bookId} });
     
         if (!book) {
-          return res.status(404).json({ message: 'Libro no encontrado' });
+          return res.status(404).json({ error: 'Libro no encontrado' });
         }
         const filteredBookData = {
             "ID": book.ID,
@@ -17,9 +17,9 @@ router.get('/get_data/:bookId', async (req, res) => {
             "description": book.description,
             "my_numeric_field": book.my_numeric_field
         };
-        res.json(filteredBookData);
+        res.status(200).json(filteredBookData);
       } catch (error) {
-        res.status(500).json({ message: 'Error al buscar el libro por ID' });
+        res.status(500).json({ error: 'Error al buscar el libro por ID' });
       }
 });
 
@@ -37,10 +37,10 @@ router.post('/input/:field', async (req, res) => {
             const bookData = {
                 "id": book.ID,
             };
-            res.json(bookData);
+            res.status(200).json(bookData);
         }
     } catch (error) {
-        res.status(500).json({ message: 'Error: No se ha podido crear el libro correctamente' });
+        res.status(500).json({ error: 'Error: No se ha podido crear el libro correctamente' });
     }
 });
 
@@ -50,9 +50,9 @@ router.put('/:bookId', async (req, res) => {
     await Book.update(req.body,{
         where: {id: req.params.bookId}
     });
-    res.json({success: 'Libro modificado correctamente'});
+    res.status(200).json({success: 'Libro modificado correctamente'});
     } catch (error) {
-        res.status(500).json({ message: 'Error: No se ha podido actualizar el libro correctamente' });
+        res.status(500).json({ error: 'Error: No se ha podido actualizar el libro correctamente' });
     }
 });
 
@@ -62,9 +62,9 @@ router.delete('/:bookId', async (req, res) => {
     await Book.destroy({
         where: {id: req.params.bookId}
     });
-    res.json({success: 'Libro eliminado correctamente'});
+    res.status(200).json({success: 'Libro eliminado correctamente'});
     } catch (error) {
-        res.status(500).json({ message: 'Error: No se ha podido eliminar el libro correctamente' });
+        res.status(500).json({ error: 'Error: No se ha podido eliminar el libro correctamente' });
     }
 });
 
