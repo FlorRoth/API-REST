@@ -1,14 +1,14 @@
 module.exports = (sequelize, type) => {
 
     return sequelize.define('book',{
-        id: {
+        ID: {
             type: type.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        title: type.STRING,
+        field_1: type.STRING,
         author: type.STRING,
         description: type.STRING,
-        pages: type.INTEGER
+        my_numeric_field: type.INTEGER
     })
 }
