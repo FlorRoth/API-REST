@@ -1,15 +1,20 @@
-const Sequelize = require ('sequelize');
+const Sequelize = require('sequelize');
+const BookModel = require('./models/books');
 
-const BookModel = require ('./models/books')
-const sequelize = new Sequelize ('rest-api','root','root',{
-    host: 'localhost',
-    dialect: 'mysql'
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: 'database.sqlite', 
 });
 
-const Book = BookModel (sequelize, Sequelize);
 
-sequelize.sync({ force : false})
+const Book = BookModel(sequelize, Sequelize);
+
+
+sequelize.sync({ force: false }).then(() => {
+  console.log('Base de datos sincronizada');
+});
 
 module.exports = {
-    Book
-}
+  Book,
+  sequelize, 
+};
