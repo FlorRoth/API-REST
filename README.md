@@ -42,7 +42,7 @@ Below you will find a sequence that you can use to test the API:
     500  "error": "Error: No se ha podido actualizar el libro correctamente"
 
 ## Delete book 
-    PUT  /:bookId
+    DELETE  /:bookId
     200: "success" : "Libro eliminado correctamente"
     500  "error": "Error: No se ha podido eliminar el libro correctamente"
 
